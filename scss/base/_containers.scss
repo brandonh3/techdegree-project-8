@@ -4,5 +4,23 @@
 
 body {
     padding: 20px;
+    padding-bottom: 30px;
     background: $light-grey;
+
+    @include mq('xl') {
+        padding: 20px 10%;
+    }
+}
+
+.employee-cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @include mq('med') {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
 }
