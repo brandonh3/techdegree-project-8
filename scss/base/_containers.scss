@@ -25,6 +25,7 @@ header {
     color: $dark-grey;
     outline: none;
     text-align: center;
+    transition: all 0.5s ease-in-out;
 
     &::placeholder {
         color: $medium-grey;
@@ -36,7 +37,6 @@ header {
         cursor: pointer;
         border: 4px solid $accent;
         transform: scale(1.05);
-        transition: 0.5s;
         -webkit-box-shadow: 3px 3px 5px 6px $shadow;
         -moz-box-shadow: 3px 3px 5px 6px $shadow;
         box-shadow: 3px 3px 5px 6px $shadow;

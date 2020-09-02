@@ -34,6 +34,8 @@ header {
   color: #9d9d9d;
   outline: none;
   text-align: center;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 #search::-webkit-input-placeholder {
@@ -61,8 +63,6 @@ header {
   border: 4px solid #03d6a1;
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
   -webkit-box-shadow: 3px 3px 5px 6px #ccc;
   box-shadow: 3px 3px 5px 6px #ccc;
 }
@@ -483,14 +483,14 @@ h1 {
   padding: 10px;
   margin-top: 30px;
   background: #fff;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .card:hover {
   cursor: pointer;
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
   border: 4px solid #03d6a1;
   -webkit-box-shadow: 3px 3px 5px 6px #ccc;
   box-shadow: 3px 3px 5px 6px #ccc;
@@ -645,12 +645,24 @@ h1 {
   }
 }
 
+.modal-img img {
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.modal-img img:hover {
+  -webkit-transform: rotate(-5deg) scale(1.1);
+          transform: rotate(-5deg) scale(1.1);
+}
+
 .close,
 .back,
 .forward {
   color: #9d9d9d;
-  font-size: 35px;
+  font-size: 40px;
   font-weight: bold;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .back {
@@ -669,11 +681,8 @@ h1 {
 .forward:hover,
 .forward:focus {
   color: #03d6a1;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
   text-decoration: none;
   cursor: pointer;
-  transition: 0.5s;
 }
 
 .modal-img {

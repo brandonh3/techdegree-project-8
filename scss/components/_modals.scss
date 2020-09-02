@@ -37,12 +37,21 @@
     }
 }
 
+.modal-img img {
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+        transform: rotate(-5deg) scale(1.1);
+    }
+}
+
 .close,
 .back,
 .forward {
     color: $dark-grey;
-    font-size: 35px;
+    font-size: 40px;
     font-weight: bold;
+    transition: all 0.5s ease-in-out;
 }
 
 .back {
@@ -61,10 +70,8 @@
 .forward:hover,
 .forward:focus {
     color: $accent;
-    transition: 0.5s;
     text-decoration: none;
-    cursor: pointer;
-    transition: 0.5s;
+    cursor: pointer;    
 }
 
 .modal-img {
