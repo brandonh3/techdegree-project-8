@@ -1,7 +1,6 @@
 // ==========================================
 //          Modal Styles
 // ==========================================
-
 .modal {
     display: none;
     flex-direction: column;
@@ -20,13 +19,13 @@
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
-    padding-top: 5px;
-    border: 1px solid #888;
+    padding-top: 20px;
     border-radius: 10px;
     width: 80%;
 
     & p {
         font-size: 0.8em;
+        color: $dark-grey;
     }
 
     @include mq('sm-med') {
@@ -38,17 +37,29 @@
     }
 }
 
-.close {
-    display: flex;
-    justify-content: flex-end;
+.close,
+.back,
+.forward {
     color: $dark-grey;
-    padding: 0;
-    font-size: 40px;
+    font-size: 35px;
     font-weight: bold;
 }
 
+.back {
+    float: left;
+}
+
+.close, 
+.forward {
+    float: right;
+}
+
 .close:hover,
-.close:focus {
+.close:focus,
+.back:hover,
+.back:focus,
+.forward:hover,
+.forward:focus {
     color: $bright-green;
     text-decoration: none;
     cursor: pointer;
@@ -73,9 +84,11 @@
 
 .modal-info {
     padding-bottom: 20px;
+    margin-left: 23.36px;
 }
 
 .modal-info-bottom {
     border-top: 1px solid $dark-grey;
     padding-top: 20px;
 }
+

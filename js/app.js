@@ -2,69 +2,162 @@
 //          Variables
 // ===============================
 
+const url = 'https://randomuser.me/api/?results=12&nat=us';
 const employeesList = document.querySelector('.employee-cards');
 const employeeCards = document.getElementsByClassName('card');
-let users;
-let employeeCard;
-let cardImg;
-let cardInfo;
-let img;
-let name;
-let email;
-let city;
+const employeeModal = document.querySelector('.modal');
+const modalTop = document.querySelector('.modal-info');
+const modalBottom = document.querySelector('.modal-info-bottom');
+let cardIndex;
+const back = document.querySelector('.back');
+const forward = document.querySelector('.forward');
 
 
+// ======================================
+//       Create Employee Cards
+// ======================================
 
-// ===============================
-//     Create Employee Cards
-// ===============================
+fetch(url)
+    .then(resp => resp.json())
+    .then(resp => resp.results)
+    .then(addEmployeeCards)
+    .catch(err => console.log(err))
 
-function randomUser(element) {
-    return document.createElement(element);
-}
+function addEmployeeCards(employeeInfo) {
+    employees = employeeInfo;
+    let employeeHTML = '';
 
-function append(parent, element) {
-    return parent.appendChild(element);
-}
-
-
-fetch('https://randomuser.me/api/?results=12&nat=us') 
-
-    .then((resp) => resp.json())
-    .then(function (data) {
-        users = data.results;
-        return users.map(function (user) {
-            employeeCard = randomUser('div'),
-                cardImg = randomUser('div'),
-                cardInfo = randomUser('div'),
-                img = randomUser('img'),
-                name = randomUser('h3'),
-                email = randomUser('p'),
-                city = randomUser('p');
-            employeeCard.classList.add('card');
-            cardImg.classList.add('card-img');
-            cardInfo.classList.add('card-info');
-            img.src = user.picture.large;
-            name.innerHTML = `${user.name.first} ${user.name.last}`;
-            email.innerHTML = `${user.email}`;
-            city.innerHTML = `${user.location.city}`;
-            append(cardImg, img),
-            append(cardInfo, name),
-            append(cardInfo, email),
-            append(cardInfo, city),
-            append(employeeCard, cardImg),
-            append(employeeCard, cardInfo);
-
-            append(employeesList, employeeCard);
-        }) 
-    })
-
-    .catch(function (error) {
-        console.log(error);
+    employees.forEach((employee, index) => {
+        let profile = employee.picture;
+        let name = employee.name;
+        let email = employee.email;
+        let city = employee.location.city;
+        
+        employeeHTML += `
+        <div class='card' data-index='${index}'>
+            <div class='card-img'>
+                <img src='${profile.large}' />
+            </div>
+            <div class='card-info'>
+                <h3 class='name'>${name.first} ${name.last}</h3>
+                <p>${email}</p>
+                <p>${city}</p>
+            </div>
+        </div>
+        `
     });
+    employeesList.innerHTML = employeeHTML;
+}
 
 
-// ===============================
-//     Create Employee Modals
-// ===============================
+// ======================================
+//       Display Modal Function
+// ======================================
+
+function displayModal(index) {
+    let { name, dob, phone, email, location: { city, street, state, postcode
+    }, picture } = employees[index];
+    let birthdate = new Date(dob.date);
+    const modalTopHTML = `
+
+            <div class="modal-img">
+                <img src="${picture.large}" />
+            </div>
+            <h3>${name.first} ${name.last}</h3>
+            <p>${email}</p>
+            <p>${city}</p>
+
+    `;
+
+    const modalBottomHTML = `
+
+            <p>${phone}</p>
+            <p>${street.number} ${street.name}</p>
+            <p>${city}, ${state} ${postcode}</p>
+            <p>Birthday:
+            ${birthdate.getMonth()}.${birthdate.getDate()}.${birthdate.getFullYear()}</p>
+
+    `;
+
+    employeeModal.style.display = 'flex';
+    modalTop.innerHTML = modalTopHTML;
+    modalBottom.innerHTML = modalBottomHTML;
+}
+
+
+// ======================================
+//       Display Modal On-Click
+// ======================================
+
+employeesList.addEventListener('click', event => {
+    if (event.target !== employeesList) {
+
+        const employeeCard = event.target.closest(".card");
+        let index = employeeCard.getAttribute('data-index');
+        cardIndex = index;
+        displayModal(index);
+    };
+
+    const modalClose = document.querySelector('.close');
+
+    modalClose.addEventListener('click', () => {
+        employeeModal.style.display = 'none';
+    });
+});
+
+
+// ======================================
+//       Modal Arrows On-Click
+// ======================================
+
+back.addEventListener('click', () => {
+    if (cardIndex > 0) {
+        cardIndex--;
+        displayModal(cardIndex)
+    } else if (cardIndex === 11) {
+        displayModal(cardIndex);
+    } else {
+        cardIndex = 11;
+        displayModal(cardIndex);
+    }
+});
+
+forward.addEventListener('click', () => {
+    if (cardIndex < 11) {
+        cardIndex++;
+        displayModal(cardIndex)
+    } else if (cardIndex === 11) {
+        cardIndex = 0;
+        displayModal(cardIndex);
+    }
+});
+
+
+// ======================================
+//          Search Employees
+// ======================================
+
+const search = document.getElementById('search');
+let input = '';
+let lowercase = '';
+
+search.addEventListener('keyup', function () {
+    let input = "";
+    let lowercase = "";
+
+    input = document.querySelector("#search");
+    lowercase = input.value.toLowerCase();
+    
+    for (let i = 0; i < employeeCards.length; i++) {
+
+        const employeeNames = document.querySelectorAll(".name"); 
+        const name = employeeNames[i].innerText.toLowerCase();
+
+        if (name.includes(lowercase)) {
+            employeeCards[i].style.display = "";
+        } else {
+            employeeCards[i].style.display = "none";
+        }
+    }
+});
 
