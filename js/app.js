@@ -9,6 +9,7 @@ const employeeModal = document.querySelector('.modal');
 const modalTop = document.querySelector('.modal-info');
 const modalBottom = document.querySelector('.modal-info-bottom');
 let cardIndex;
+let employees;
 const back = document.querySelector('.back');
 const forward = document.querySelector('.forward');
 
@@ -21,7 +22,7 @@ fetch(url)
     .then(resp => resp.json())
     .then(resp => resp.results)
     .then(addEmployeeCards)
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
 
 function addEmployeeCards(employeeInfo) {
     employees = employeeInfo;
@@ -44,7 +45,7 @@ function addEmployeeCards(employeeInfo) {
                 <p>${city}</p>
             </div>
         </div>
-        `
+        `;
     });
     employeesList.innerHTML = employeeHTML;
 }
@@ -96,7 +97,7 @@ employeesList.addEventListener('click', event => {
         let index = employeeCard.getAttribute('data-index');
         cardIndex = index;
         displayModal(index);
-    };
+    }
 
     const modalClose = document.querySelector('.close');
 
@@ -113,8 +114,8 @@ employeesList.addEventListener('click', event => {
 back.addEventListener('click', () => {
     if (cardIndex > 0) {
         cardIndex--;
-        displayModal(cardIndex)
-    } else if (cardIndex = 11) {
+        displayModal(cardIndex);
+    } else if (cardIndex == 11) {
         displayModal(cardIndex);
     } else {
         cardIndex = 11;
@@ -125,8 +126,8 @@ back.addEventListener('click', () => {
 forward.addEventListener('click', () => {
     if (cardIndex < 11) {
         cardIndex++;
-        displayModal(cardIndex)
-    } else if (cardIndex = 11) {
+        displayModal(cardIndex);
+    } else if (cardIndex == 11) {
         cardIndex = 0;
         displayModal(cardIndex);
     }
@@ -138,8 +139,6 @@ forward.addEventListener('click', () => {
 // ======================================
 
 const search = document.getElementById('search');
-let input = '';
-let lowercase = '';
 
 search.addEventListener('keyup', function () {
 
