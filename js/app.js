@@ -114,7 +114,7 @@ back.addEventListener('click', () => {
     if (cardIndex > 0) {
         cardIndex--;
         displayModal(cardIndex)
-    } else if (cardIndex === 11) {
+    } else if (cardIndex = 11) {
         displayModal(cardIndex);
     } else {
         cardIndex = 11;
@@ -126,7 +126,7 @@ forward.addEventListener('click', () => {
     if (cardIndex < 11) {
         cardIndex++;
         displayModal(cardIndex)
-    } else if (cardIndex === 11) {
+    } else if (cardIndex = 11) {
         cardIndex = 0;
         displayModal(cardIndex);
     }
@@ -142,11 +142,9 @@ let input = '';
 let lowercase = '';
 
 search.addEventListener('keyup', function () {
-    let input = "";
-    let lowercase = "";
 
-    input = document.querySelector("#search");
-    lowercase = input.value.toLowerCase();
+    let input = document.querySelector("#search");
+    let lowercase = input.value.toLowerCase();
     
     for (let i = 0; i < employeeCards.length; i++) {
 
